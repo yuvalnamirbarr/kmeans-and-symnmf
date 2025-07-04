@@ -64,12 +64,3 @@ The output includes clustering results and optionally visualizations.
 
 ---
 
-## 🛠️ Dependencies
-
-- Python 3.x
-- NumPy
-- Matplotlib (optional, for visualization)
-- GCC (for compiling C code)
-
----
-
