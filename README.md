@@ -15,14 +15,17 @@ This project implements unsupervised clustering algorithms from scratch, using a
 ## 📁 Repository Structure
 
 ```
-📄 algo_funcs.c/h            # Core clustering logic (kmeans, initialization, distance)
-📄 matrix_operations.c/h     # Matrix computations (norms, dot products, matrix multiplications)
-📄 symnmf.c / symnmf.py      # Symmetric NMF logic in C and Python
-📄 wrapper_utils.c/h         # Python-C interface helpers
-📄 setup.py                  # Builds the C extension for Python
-📄 analysis.py               # Main Python script to run and compare clustering results
-📄 utils.py                  # Data loading, normalization, and helper functions
-📄 Makefile                  # Optional C build script
+📄 algo_funcs.c/h            # KMeans++ logic: initialization, distance calculation, centroid updates
+📄 matrix_operations.c/h     # Low-level matrix operations: dot product, norms, multiplication
+📄 symnmf.c                  # SymNMF core algorithm implemented in C
+📄 symnmf.py                 # Python wrapper to call SymNMF logic
+📄 symmodule.c               # CPython extension interface between Python and C
+📄 wrapper_utils.c/h         # Utility functions for data conversion and memory handling in the interface layer
+📄 kmean.py                  # Python interface for KMeans algorithm
+📄 analysis.py               # Main script to run experiments using KMeans and SymNMF
+📄 utils.py                  # Helpers: reading input, preprocessing, data conversion
+📄 setup.py                  # Builds the C extension module for Python
+📄 Makefile                  # Optional build script for pure-C compilation
 ```
 
 ---
@@ -48,19 +51,26 @@ To run the full pipeline (from Python):
 ```bash
 python3 analysis.py <input_file> <k>
 ```
-- `<input_file>`: CSV or space-separated file of vectors (rows = data points)
+- `<input_file>`: Space-separated file of vectors (rows = data points)
 - `<k>`: number of clusters
 
-The output includes clustering results and optionally visualizations.
+The output includes clustering results printed to standard output.
 
 ---
 
 ## 💡 Features
 
-- KMeans++ implemented from scratch
-- Custom SymNMF routine using iterative update rules
-- Efficient memory use via NumPy + native C arrays
-- Python–C integration using CPython API
+- Custom implementation of KMeans++
+- Spectral clustering via SymNMF using iterative update rules
+- Efficient computation via C back-end
+- Integrated Python–C interface using CPython API
 
 ---
 
+## 🛠️ Dependencies
+
+- Python 3.x
+- NumPy
+- GCC (for compiling C code)
+
+---
